@@ -49,15 +49,7 @@ h1 {
 /* This class should be applied to a puzzle piece that can be moved. */
 .puzzlepiecehover {
 	border-color: red;
-	color: #660066;
+	color: red;
 	font-weight: bold;
 	text-decoration: underline;
-}
-
-#w3c {
-	text-align: right;
-}
-
-#w3c img {
-	border: none;
 }

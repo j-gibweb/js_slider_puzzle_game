@@ -12,22 +12,20 @@ document.onreadystatechange = function () {
       document.getElementById("overall").insertAdjacentHTML('beforeend', "number of moves: <span id='numberOfMoves'>0</span>");
 
       function checkIfComplete() {
-        var check = ""
+        var check = "";
         var arr = document.getElementById("puzzlearea").children;
         for (i = 0; i < arr.length; i++) {
-          check = check + arr[i].innerHTML 
+          check = check + arr[i].innerHTML;
         };
         if (check == "123456789101112131415" && numberOfMoves > 20) {
-          celebrate()
+          celebrate();
           return true;
         }
       }
 
-      function reload() {alert("hey") }
-
       function celebrate() {
         document.getElementById("puzzlearea").innerHTML = "<div><img onclick='location.reload();' src='http://rack.2.mshcdn.com/media/ZgkyMDEzLzA4LzA1LzYyL2FuY2hvcm1hbi42NjJkYS5naWYKcAl0aHVtYgk4NTB4ODUwPgplCWpwZw/e36d14bd/1c0/anchorman.jpg'/></div><br /><h1 onclick='location.reload();'>Good Job</h1>";
-        document.getElementById("shufflebutton").outerHTML = ""
+        document.getElementById("shufflebutton").outerHTML = "";
       }
 
       function shuffle(shuffleTracker) {
@@ -36,8 +34,8 @@ document.onreadystatechange = function () {
         if (shuffleTracker < 199) 
           { 
             shuffleTracker = shuffleTracker + 1;
-            // recusively shuffle 99 times 
-            shuffle(shuffleTracker) 
+            // recusively shuffle 199 times 
+            shuffle(shuffleTracker);
           }
           else {
             // reset
