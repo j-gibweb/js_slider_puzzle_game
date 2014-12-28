@@ -3,8 +3,9 @@
   <title>m fifteen puzzle</title>
 
   <link rel="stylesheet" type="text/css" href="old_files/fifteen_style.css" />
-  <script type="text/javascript" src="./game_logic.js"></script>
   <script type="text/javascript" src="./bower_components/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="./game_logic.js"></script>
+  
 
 </head>
 <body>
@@ -22,44 +23,19 @@
 
 $(function() {
 
-  // going to need to decide on a standard for input dimensions, hundreds of pixels? 
+  // this will be the input image, the one the user wants to scramble and send to a friend as 
+  // a puzzle..
+
+  // we're going to need to decide on a standard for input dimensions, hundreds of pixels? 
   // or number of rows / columns
   var imageStub = {
     width: 400,
     n: 4,
   };
 
-
-
-  var game = {
-    init: function() {
-      // storing the matrix object as a param on this here client side game object~
-      game.matrix = new Matrix(imageStub.n);
-      game.matrix.initialize();
-      game.assemblePlayArea();
-    },
-    assemblePlayArea: function() {
-      game.matrix.grid.forEach(function(item, i, collection) {
-        // if we aren't creating the 'last' or bottom, right tile
-        if (i !== collection.length-1) {
-          var el = $('<div class="puzzlepiece"><span class="position">'+ Number(i + 1) + '</span></div>')
-          $('#puzzlearea').append(el);
-          // real cool animation thing
-          el.animate({
-            top: item.y+'px',
-            left: item.x+'px',
-            'background-position-x': '-' + item.x + 'px',
-            'background-position-y': '-' + item.y + 'px',
-          }, 1000);
-        // insert empty div with empty class.
-        } else {
-          $('#puzzlearea').append('<div class="empty"></div>');
-        }
-      });
-    },
-
-  }
-  game.init();
+  var game = new Game();
+  // send image object along with Game.init
+  game.initialize(imageStub);
 });
 
 

@@ -1,43 +1,52 @@
+
 /* global game_logic, describe, it, expect, should */
 
-describe('Matrix Class', function () {
+describe('Game object', function () {
   'use strict';
 
   var n = 4;
   var matrix = new Matrix(n);
-    
+  
+  var imageStub = {
+    width: 400,
+    n: 4,
+  };
+  var game = new Game();
+  game.initialize(imageStub);  
 
-  beforeEach(function() {
-    
-  });
+  beforeEach(function() {});
 
   it('exists', function () {
-    expect(matrix).to.be.a('object');
+    expect(game.matrix).to.be.a('object');
   });
 
-  it('creates a new grid of n by n size', function () {
-    expect(matrix.initialize().length).to.equal(n*n);
+  it('creates a new array of n by n size', function () {
+    expect(game.matrix.array.length).to.equal(n*n);
   });
 
   it('initializes X cells as expected', function () {
     var testArrayX = [0,100,200,300,0,100,200,300,0,100,200,300,0,100,200,300];    
-    matrix.grid.forEach(function(item, i) {
+    matrix.array.forEach(function(item, i) {
       expect(item.x).to.equal(testArrayX[i]); 
     });  
   });
 
   it('initializes Y cells as expected', function () {
     var testArrayY = [0,0,0,0,100,100,100,100,200,200,200,200,300,300,300,300];    
-    matrix.grid.forEach(function(item, i) {
+    matrix.array.forEach(function(item, i) {
       expect(item.y).to.equal(testArrayY[i]); 
     });  
   });
 
-  it('initializes open property as expected', function () {
-    var testArrayOpen = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true];    
-    matrix.grid.forEach(function(item, i) {
-      expect(item.open).to.equal(testArrayOpen[i]); 
-    });  
+  it('initializes the open cell object to be the last cell in the array', function () {
+    expect(game.matrix.openCell.x).to.equal((n-1)*100); 
+    expect(game.matrix.openCell.y).to.equal((n-1)*100); 
+    expect(game.matrix.openCell.domObject.hasClass('empty')).to.equal(true); 
+  });
+
+  it('should contain valid cells in the game.movables array', function () {
+    expect(game.movables).to.contain(11);
+    expect(game.movables).to.contain(14); 
   });
 
 
@@ -58,18 +67,7 @@ describe('Cell Class', function () {
     expect(cell).to.be.a('object');
   });
 
-  it('returns false if cell is not open', function () {
-    expect(cell.open).to.equal(false);
-  });
-
-  it('does something else', function () {
-    expect(true).to.equal(false);
-  });
-
-  // Add more assertions here
 });
-
-
 
 
 
