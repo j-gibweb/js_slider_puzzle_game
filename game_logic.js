@@ -114,9 +114,10 @@
       console.log(item);
 
       item.domObject.on('mouseover', function(event) {
-        $(this).animate({'border-radius': 50}, 200); 
+        // $(this).animate({'border-radius': 50}, 200); 
+        $(this).animo( { animation: 'tada' } );
       }).on('mouseleave', function(event) {
-        $(this).animate({'border-radius': 0}, 200);
+        // $(this).animate({'border-radius': 0}, 200);
       }).on('click', this.shiftPuzzlePiece);
 
     }.bind(this));
@@ -124,7 +125,7 @@
 
 
   Game.prototype.shiftPuzzlePiece = function(event) {
-    
+
   };
 
 
