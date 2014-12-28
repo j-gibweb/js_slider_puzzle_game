@@ -63,6 +63,11 @@
           'background-position-x': '-' + item.x + 'px',
           'background-position-y': '-' + item.y + 'px',
         }, 1000);
+        
+        // 
+        // is it stupid to store the domObject in memory like this?
+        // 
+
         item.domObject = el;
       // insert empty div with empty class.
       } else {
@@ -107,12 +112,20 @@
   Game.prototype.addEventListeners = function() {
     this.movables.forEach(function(item) {
       console.log(item);
-      // puzzleAreaContents[movables[i]].addEventListener("mouseover", addPuzzlePieceHover, false);
-      
-      // puzzleAreaContents[movables[i]].addEventListener("mouseout", removePuzzlePieceHover, false);
-      // puzzleAreaContents[movables[i]].addEventListener("click", shiftPuzzlePiece);
+
+      item.domObject.on('mouseover', function(event) {
+        $(this).animate({'border-radius': 50}, 200); 
+      }).on('mouseleave', function(event) {
+        $(this).animate({'border-radius': 0}, 200);
+      }).on('click', this.shiftPuzzlePiece);
+
     }.bind(this));
-  }
+  };
+
+
+  Game.prototype.shiftPuzzlePiece = function(event) {
+    
+  };
 
 
 

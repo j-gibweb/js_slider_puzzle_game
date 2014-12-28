@@ -47,7 +47,12 @@ h1 {
 }
 
 .position {
-	/*display:none;*/
+	display:none;
+}
+
+.swell {
+	width: 120px;
+	height: 120px;
 }
 
 /* This class should be applied to a puzzle piece that can be moved. */
