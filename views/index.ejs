@@ -1,24 +1,26 @@
 <html>
 <head>
   <title>m fifteen puzzle</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
   <link href="/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
   <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
-
-  <link href="/css/fifteen_style.css" rel="stylesheet">
-
+  <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
   
   <script type="text/javascript" src="/bower_components/animo.js/animo.js"></script>
   <link href="/bower_components/animo.js/animate+animo.css" rel="stylesheet" type="text/css">
 
   <script type="text/javascript" src="/js/game_logic.js"></script>
+  <link href="/css/fifteen_style.css" rel="stylesheet">
   
   <script type="text/javascript">
-
   $(function() {
-
     // this will be the input image, the one the user wants to scramble and send to a friend as 
     // a puzzle..
-
     // we're going to need to decide on a standard for input dimensions, hundreds of pixels? 
     // or number of rows / columns
     var imageStub = {
@@ -30,21 +32,25 @@
     // send image object along with Game.init
     game.initialize(imageStub);
   });
-
-
   </script>
-
-
 </head>
 <body>
-  <!-- <div id="controls"><button id="shufflebutton">Shuffle</button></div> -->
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
-        <div id="puzzlearea"></div>
+      <div class="row">
+          <div class="col-md-4 col-md-offset-4">
+              <div id="puzzlearea"></div>
+          </div>
       </div>
-    </div>
   </div>
-
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+

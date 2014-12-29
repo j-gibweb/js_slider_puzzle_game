@@ -15,17 +15,11 @@ h1 {
 	text-align: center;
 }
 
-/* Used to center the puzzle. */
-#overall {
-	margin-left: auto;
-	margin-right: auto;
-}
 
 /* The area that holds the 15 puzzle pieces. */
 #puzzlearea {
-	font-family: sans-serif;
+	font-family: monospace;
 	font-size: 32pt;
-	/*height: 400px;*/
 	padding: 0px;
 	position: relative;
 }
@@ -53,3 +47,20 @@ h1 {
 	font-weight: bold;
 	text-decoration: underline;
 }
+
+
+
+
+
+
+
+/*BOOTSTRAP OVERRIDES*/
+
+
+.container-fluid {
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
