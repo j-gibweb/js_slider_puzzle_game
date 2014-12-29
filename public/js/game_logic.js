@@ -14,8 +14,10 @@
       for (var x = 0; x < n; x++) {
         // multiply x and y coords by 100, because they also serve as pixel values
         // this seems like kind of bad design, not sure.
-        var xVal = x * 100;
+        var xVal = x * 80;
+        // var xVal = x * 100;
         var yVal = y * 100;
+        // var yVal = y * 100;
         var cell = new Cell(xVal, yVal, index);
         
         this.array.push(cell);

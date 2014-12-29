@@ -20,20 +20,24 @@ h1 {
 #puzzlearea {
 	font-family: monospace;
 	font-size: 32pt;
-	padding: 0px;
+	/*margin-top: 30px;*/
 	position: relative;
 }
 
 /* This class should be applied to each of the 15 puzzle pieces. */
 .puzzlepiece {
-	background-image: url(/images/lsp.png);
+	/*background-image: url(/images/lsp.png);*/
+	background-image: url(/images/adventure_time_2.jpg);
+	background-size: 320px 400px;
 	border: 2px solid black;
 	height: 96px;
+	/*height: 106px;*/
 	line-height: 96px;
 	position: absolute;
 	text-align: center;
 	vertical-align: middle;
-	width: 96px;
+	/*width: 96px;*/
+	width: 76px;
 }
 
 .position {

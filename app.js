@@ -10,7 +10,9 @@ app.use(multer({ dest: './uploads/'}))
 var env = process.env.NODE_ENV || 'dev';
 
 
+
 // DB SETUP
+
 
 
 app.set('view engine', 'ejs');
@@ -22,7 +24,6 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.get('/', function(req, res) {
   res.render("index");
 });
-
 
 
 
