@@ -32,7 +32,9 @@
   };
 
 
-  var Game = function() {};
+  var Game = function() {
+    this.moves = 0;
+  };
 
   Game.prototype.initialize =  function(imageStub) {
     // storing the matrix object as a param on this here client side game object~
@@ -42,9 +44,10 @@
     this.assemblePlayArea();
     // figure out which pieces should be movable
     this.getMovablePieces();
-
     // add special magical glitter
     this.addEventListeners();
+
+    this.shuffle();
   };
 
   // Here is where we assemble the html for the play area
@@ -62,7 +65,9 @@
           left: item.x+'px',
           'background-position-x': '-' + item.x + 'px',
           'background-position-y': '-' + item.y + 'px',
-        }, 1000);
+        }, 500);
+        // animo tada, so good
+        el.animo( { animation: 'tada', duration: 1.0 } );
         
         // 
         // is it stupid to store the domObject in memory like this?
@@ -111,24 +116,94 @@
 
   Game.prototype.addEventListeners = function() {
     this.movables.forEach(function(item) {
-      console.log(item);
+
+      $(item.domObject).animo( { animation: 'pulse', iterate: "infinite" } );
 
       item.domObject.on('mouseover', function(event) {
-        // $(this).animate({'border-radius': 50}, 200); 
-        $(this).animo( { animation: 'tada' } );
+        // $(this).animo( { animation: 'pulse', iterate: "infinite" } );
+        $(this).animo('cleanse');
+        // $(this).addClass('puzzlepiecehover')
+      
       }).on('mouseleave', function(event) {
-        // $(this).animate({'border-radius': 0}, 200);
-      }).on('click', this.shiftPuzzlePiece);
+        // $(this).animo('cleanse');
+        $(this).animo( { animation: 'pulse', iterate: "infinite" } );
+        // $(this).removeClass('puzzlepiecehover')  
+      
+      }).on('click', item, this.shiftPuzzlePiece.bind(this));
 
     }.bind(this));
   };
 
 
   Game.prototype.shiftPuzzlePiece = function(event) {
+    this.cleanUpMovables();
+
+    this.moves++;
+
+    var clickedObject = event.data;
+    var oldX = clickedObject.x;
+    var oldY = clickedObject.y;
+    var oldIndex = clickedObject.index
+    
+    var openCell = this.matrix.openCell;
+    
+
+    clickedObject.x = openCell.x;
+    clickedObject.y = openCell.y;
+    clickedObject.index = openCell.index;
+    this.matrix.array[openCell.index] = clickedObject;
+    // change dom object too
+    $(clickedObject.domObject).animate({
+      left: this.matrix.openCell.x,
+      top: this.matrix.openCell.y
+    }, 200);
+
+    // set openCell to previously occupied cell coordinates
+    this.matrix.openCell.x = oldX;
+    this.matrix.openCell.y = oldY;
+    this.matrix.openCell.index = oldIndex;
+    this.matrix.array[oldIndex] = openCell
+
+
+    // console.log("\n clickedObject.domObject clicked piece\n");
+    // console.log(clickedObject.domObject);
+    
+    // console.log("\n this.matrix.openCell empty space\n");
+    // console.log(this.matrix.openCell);
+    
+    // console.log("\ngame.movables array\n");
+    // console.log(this.movables);
+    
+    // console.log("\nclickedObject from game.movables from event listener\n")
+    // console.log(clickedObject)
+
+    // figure out which pieces should be movable
+    this.getMovablePieces();
+
+    // add special magical glitter
+    this.addEventListeners();
 
   };
 
 
+  Game.prototype.cleanUpMovables = function() {
+    this.movables.forEach(function(item) {
+
+      item.domObject.off('click');
+      item.domObject.off('mouseover');
+      item.domObject.off('mouseleave');
+      item.domObject.animo('cleanse');
+      item.domObject.removeClass('puzzlepiecehover');
+      
+    });
+  };
+
+  Game.prototype.shuffle = function() {
+    for (var i = 0; i < 250; i++) {
+      var randomElement = this.movables[Math.floor(Math.random() * this.movables.length)];
+      $(randomElement.domObject).trigger('click');
+    }
+  };
 
 
 
