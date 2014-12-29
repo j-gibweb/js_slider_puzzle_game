@@ -29,11 +29,12 @@
     this.y = y;
     this.domObject = null;
     this.index = index;
+    this.originalIndex = index;
   };
 
 
   var Game = function() {
-    this.moves = 0;
+    this.playable = false;
   };
 
   Game.prototype.initialize =  function(imageStub) {
@@ -48,6 +49,8 @@
     this.addEventListeners();
 
     this.shuffle();
+    this.moves = 0;
+    this.playable = true;
   };
 
   // Here is where we assemble the html for the play area
@@ -55,8 +58,7 @@
   // and do that really cool animation thing
   Game.prototype.assemblePlayArea = function() {
     this.matrix.array.forEach(function(item, i, collection) {
-      // if we aren't creating the 'last' or bottom, right tile
-      if (i !== collection.length-1) {
+      
         var el = $('<div class="puzzlepiece"><span class="position">'+ Number(i + 1) + '</span></div>')
         $('#puzzlearea').append(el);
         // real cool animation thing
@@ -72,16 +74,14 @@
         // 
         // is it stupid to store the domObject in memory like this?
         // 
+        item.domObject = el;
 
-        item.domObject = el;
-      // insert empty div with empty class.
-      } else {
-        var el = $('<div class="empty"></div>')
-        $('#puzzlearea').append(el);
-        item.domObject = el;
-        this.matrix.openCell = item;
-      }
-      // bind game object to anon function in iterator loop
+        // the 'last' or bottom, right tile is the "empty" space
+        if (i === collection.length-1) {
+          el.fadeOut();
+          this.matrix.openCell = item;
+        }
+
     }.bind(this));
   };
 
@@ -120,14 +120,12 @@
       $(item.domObject).animo( { animation: 'pulse', iterate: "infinite" } );
 
       item.domObject.on('mouseover', function(event) {
-        // $(this).animo( { animation: 'pulse', iterate: "infinite" } );
         $(this).animo('cleanse');
-        // $(this).addClass('puzzlepiecehover')
+        $(this).addClass('puzzlepiecehover')
       
       }).on('mouseleave', function(event) {
-        // $(this).animo('cleanse');
         $(this).animo( { animation: 'pulse', iterate: "infinite" } );
-        // $(this).removeClass('puzzlepiecehover')  
+        $(this).removeClass('puzzlepiecehover')  
       
       }).on('click', item, this.shiftPuzzlePiece.bind(this));
 
@@ -135,7 +133,9 @@
   };
 
 
+  // This can be a lot cleaner, I'm just tired
   Game.prototype.shiftPuzzlePiece = function(event) {
+
     this.cleanUpMovables();
 
     this.moves++;
@@ -182,19 +182,20 @@
 
     // add special magical glitter
     this.addEventListeners();
-
+    
+    if (this.checkForCompleteness() === true) {
+      this.celebrate();
+    }
   };
 
 
   Game.prototype.cleanUpMovables = function() {
     this.movables.forEach(function(item) {
-
       item.domObject.off('click');
       item.domObject.off('mouseover');
       item.domObject.off('mouseleave');
       item.domObject.animo('cleanse');
       item.domObject.removeClass('puzzlepiecehover');
-      
     });
   };
 
@@ -205,10 +206,44 @@
     }
   };
 
+  Game.prototype.checkForCompleteness = function() {
+    if (this.playable === false) {return false;}
+
+    var finished = true;
+
+    this.matrix.array.forEach(function(item) {
+      // console.log("item index  " + item.index  + " item originalIndex " + item.originalIndex);
+
+      if (item.index !== item.originalIndex) {
+        finished = false;
+      } 
+
+    });
+    return finished;
+    
+  };
 
 
+  Game.prototype.celebrate = function() {
 
+    this.cleanUpMovables();
 
+    this.matrix.openCell.domObject.fadeIn();
+
+    var animation = setInterval(function(){
+      var item = this.matrix.array.pop();
+      item.domObject.animo({ animation: 'bounceOutRight', keep: true });
+
+      if (!this.matrix.array.length) {
+        clearInterval(animation)  
+        $("#puzzlearea").animo({ animation: 'bounceOutRight', keep: true });
+        $("#puzzlearea").html("<div><img src='./images/anchorman.jpg'/></div><br /><h1>Yay For You!</h1>");
+        $("#puzzlearea").animo({ animation: 'bounceInLeft', keep: true });
+      }
+
+    }.bind(this), 200)
+
+  };
 
 
 

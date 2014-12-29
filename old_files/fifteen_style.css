@@ -47,17 +47,12 @@ h1 {
 }
 
 .position {
-	display:none;
-}
-
-.swell {
-	width: 120px;
-	height: 120px;
+	/*display:none;*/
 }
 
 /* This class should be applied to a puzzle piece that can be moved. */
 .puzzlepiecehover {
-	/*border-color: red;*/
+	border-color: red;
 	color: red;	
 	font-weight: bold;
 	text-decoration: underline;
