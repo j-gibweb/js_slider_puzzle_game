@@ -137,7 +137,7 @@
             swipe:function(event, direction, distance, duration, fingerCount) {
               $(this).trigger('click');
             },
-            //Default is 75px, set to 0 for demo so any distance triggers swipe
+            //the number of pixels the finger can travel across before triggering the effect
             threshold:0
           });
 
@@ -147,6 +147,7 @@
 
   // This can be a lot cleaner, I'm just tired
   Game.prototype.shiftPuzzlePiece = function(event) {
+    this.playSoundEffect();
 
     this.cleanUpMovables();
 
@@ -198,6 +199,19 @@
     if (this.checkForCompleteness() === true) {
       this.celebrate();
     }
+  };
+
+  Game.prototype.playSoundEffect = function() {
+    // play the dumb bloop sound
+    if (this.moves % 2 === 0) {
+      $("#audio1").trigger('play');  
+    } else {
+      $("#audio2").trigger('play');  
+    }
+    // $("#audio1").trigger('play');  
+    // $("#audio1").prop("currentTime",0);
+
+    
   };
 
 

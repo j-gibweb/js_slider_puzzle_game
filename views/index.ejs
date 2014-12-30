@@ -16,6 +16,7 @@
   <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
   
   <script type="text/javascript" src="/bower_components/animo.js/animo.js"></script>
+
   <link href="/bower_components/animo.js/animate+animo.css" rel="stylesheet" type="text/css">
 
   <script type='application/javascript' src='/bower_components/fastclick/lib/fastclick.js'></script>
@@ -41,34 +42,30 @@
 
     FastClick.attach(document.body);
 
+
+
+    // dumb chime sound stuff
+    $("#audio1").trigger('load');
+    $("#audio2").trigger('load');
+
   });
-
-
-
-  // $(function() {      
-  //   //Keep track of how many swipes
-  //   var count=0;
-  //   //Enable swiping...
-  //   $("#test").swipe( {
-  //     //Generic swipe handler for all directions
-  //     swipeLeft:function(event, direction, distance, duration, fingerCount) {
-  //       $(this).text("You swiped " + direction + " " + ++count + " times " );  
-  //     },
-  //     //Default is 75px, set to 0 for demo so any distance triggers swipe
-  //     threshold:0
-  //   });
-  // });
 
   </script>
 </head>
 <body>
-  <!-- <div class="row"> -->
-      <!-- <div class="col-md-12"> -->
-        <div id="puzzlearea"></div>
-        <!-- <div id="test" style="width: 300px; height:400px;">swipe me</div> -->
-      <!-- </div> -->
-  <!-- </div> -->
+  <div id="puzzlearea"></div>
   
+  <!-- I have two of these here because I can't figure out a better way to  -->
+  <!-- have the mp3 reset fast enough to support rapid user clicks / swipes -->
+  <audio id="audio1" preload="none" style="display:none;"> 
+     <source src="audio/bloop1.mp3" type="audio/mpeg">
+     <!-- <source src="audio/music.ogg" type="audio/ogg"> -->
+  </audio>
+  <audio id="audio2" preload="none" style="display:none;"> 
+     <source src="audio/bloop2.mp3" type="audio/mpeg">
+     <!-- <source src="audio/music.ogg" type="audio/ogg"> -->
+  </audio>
+
 </body>
 </html>
 
