@@ -131,6 +131,16 @@
       
       }).on('click', item, this.shiftPuzzlePiece.bind(this));
 
+      // swipe listener
+      item.domObject.swipe({
+            //Generic swipe handler for all directions
+            swipe:function(event, direction, distance, duration, fingerCount) {
+              $(this).trigger('click');
+            },
+            //Default is 75px, set to 0 for demo so any distance triggers swipe
+            threshold:0
+          });
+
     }.bind(this));
   };
 

@@ -8,7 +8,11 @@
 
 
   <link href="/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+  
   <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+
+  <script type="text/javascript" src="/bower_components/jquery-touchswipe/jquery.touchSwipe.js"></script>
+
   <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
   
   <script type="text/javascript" src="/bower_components/animo.js/animo.js"></script>
@@ -16,9 +20,9 @@
 
   <script type='application/javascript' src='/bower_components/fastclick/lib/fastclick.js'></script>
 
-
-  <script type="text/javascript" src="/js/game_logic.js"></script>
   <link href="/css/fifteen_style.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/game_logic.js"></script>
+  
 
   <script type="text/javascript">
   $(function() {
@@ -26,9 +30,9 @@
     // a puzzle..
     // we're going to need to decide on a standard for input dimensions, hundreds of pixels? 
     // or number of rows / columns
+
     var imageStub = {
-      width: 400,
-      n: 4,
+      n: 4
     };
 
     var game = new Game();
@@ -38,16 +42,33 @@
     FastClick.attach(document.body);
 
   });
+
+
+
+  // $(function() {      
+  //   //Keep track of how many swipes
+  //   var count=0;
+  //   //Enable swiping...
+  //   $("#test").swipe( {
+  //     //Generic swipe handler for all directions
+  //     swipeLeft:function(event, direction, distance, duration, fingerCount) {
+  //       $(this).text("You swiped " + direction + " " + ++count + " times " );  
+  //     },
+  //     //Default is 75px, set to 0 for demo so any distance triggers swipe
+  //     threshold:0
+  //   });
+  // });
+
   </script>
 </head>
 <body>
-  <div class="container-fluid">
-      <div class="row">
-          <div class="col-md-4 col-md-offset-4">
-              <div id="puzzlearea"></div>
-          </div>
-      </div>
-  </div>
+  <!-- <div class="row"> -->
+      <!-- <div class="col-md-12"> -->
+        <div id="puzzlearea"></div>
+        <!-- <div id="test" style="width: 300px; height:400px;">swipe me</div> -->
+      <!-- </div> -->
+  <!-- </div> -->
+  
 </body>
 </html>
 
