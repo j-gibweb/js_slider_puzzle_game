@@ -1,27 +1,17 @@
-/* CSE 190M Homework 4 (Fifteen Puzzle) style sheet */
 
-
-#controls, #overall, #puzzlearea {
-	/*width: 400px;*/
-}
-
-#controls {
-	padding-top: 10px;
-	text-align: center;
-}
 
 h1 {
 	margin: 10px 0px;
 	text-align: center;
 }
 
-
-/* The area that holds the 15 puzzle pieces. */
 #puzzlearea {
 	font-family: monospace;
 	font-size: 32pt;
-	/*margin-top: 30px;*/
+	margin-top: 10px;
 	position: relative;
+	margin-right: auto;
+	margin-left: 2px;
 }
 
 /* This class should be applied to each of the 15 puzzle pieces. */
