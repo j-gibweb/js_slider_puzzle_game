@@ -107,6 +107,9 @@
       delete this.movables[3];
     }
     
+    // figure out how to avoid filter step, prevent addition of undefined indexes
+    // rather than filter them out after..
+
     this.movables = this.movables.filter(function(item) {
       if (item !== undefined) {
         return item;
@@ -133,13 +136,13 @@
 
       // swipe listener
       item.domObject.swipe({
-            //Generic swipe handler for all directions
-            swipe:function(event, direction, distance, duration, fingerCount) {
-              $(this).trigger('click');
-            },
-            //the number of pixels the finger can travel across before triggering the effect
-            threshold:0
-          });
+        //Generic swipe handler for all directions
+        swipe:function(event, direction, distance, duration, fingerCount) {
+          $(this).trigger('click');
+        },
+        //the number of pixels the finger can travel across before triggering the effect
+        threshold:0
+      });
 
     }.bind(this));
   };
@@ -190,7 +193,7 @@
     // console.log("\nclickedObject from game.movables from event listener\n")
     // console.log(clickedObject)
 
-    // figure out which pieces should be movable
+    // figure out which pieces should be movable next
     this.getMovablePieces();
 
     // add special magical glitter
@@ -202,16 +205,14 @@
   };
 
   Game.prototype.playSoundEffect = function() {
-    // play the dumb bloop sound
+    // the sound wont return to time 0 
+    // fast enough to only use one clip,
+    // find another one for variety at least
     if (this.moves % 2 === 0) {
       $("#audio1").trigger('play');  
     } else {
       $("#audio2").trigger('play');  
     }
-    // $("#audio1").trigger('play');  
-    // $("#audio1").prop("currentTime",0);
-
-    
   };
 
 
@@ -233,13 +234,14 @@
   };
 
   Game.prototype.checkForCompleteness = function() {
+    // linear operation every single time player moves a piece,
+    // not great...
     if (this.playable === false) {return false;}
 
     var finished = true;
 
     this.matrix.array.forEach(function(item) {
       // console.log("item index  " + item.index  + " item originalIndex " + item.originalIndex);
-
       if (item.index !== item.originalIndex) {
         finished = false;
       } 
@@ -268,7 +270,6 @@
       }
 
     }.bind(this), 200)
-
   };
 
 
