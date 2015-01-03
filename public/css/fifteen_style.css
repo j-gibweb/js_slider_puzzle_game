@@ -1,5 +1,5 @@
 body {
-	background-color: #5FAD8F;	
+	background-color: #5FAD8F;
 }
 
 h1 {
@@ -23,11 +23,12 @@ h1 {
 	background-size: 320px 400px;
 	border: 2px solid #3A313B;
 	height: 96px;
+	/*height: 24.303797468%;*/
 	line-height: 96px;
 	position: absolute;
 	text-align: center;
 	vertical-align: middle;
-	/*width: 96px;*/
+	/*width: 23.75%;*/
 	width: 76px;
 }
 
