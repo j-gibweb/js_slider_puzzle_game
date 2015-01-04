@@ -10,26 +10,9 @@
     var n = this.n;
     var index = 0;
 
-    console.log(window.innerHeight)
-    console.log(window.innerWidth)
-
     for (var y = 0; y < n; y++) {
       for (var x = 0; x < n; x++) {
-        // multiply x and y coords by 100, because they also serve as pixel values
-        // this seems like kind of bad design, not sure.
-        
-        // var xVal = x * 80;
-
-        // switching to % based values
-        var xVal = x * 25;
-
-        // var xVal = x * 100;
-
-        // switching to % based values
-        var yVal = y * 25;
-        // var yVal = y * 100;
-        var cell = new Cell(xVal, yVal, index);
-        
+        var cell = new Cell(x, y, index);
         this.array.push(cell);
         index++;
       } 
@@ -44,6 +27,23 @@
     this.originalIndex = index;
   };
 
+  // turns out background-position-x and y are quite strange
+  // values need to be 0%, 33.3333333%, 66.666666%, and 100%
+  Cell.prototype.backgroundX = function() {
+    return ((this.x / 3) * 100) +'%'
+  };
+
+  Cell.prototype.backgroundY = function() {
+    return ((this.y / 3) * 100) +'%'
+  };
+
+  Cell.prototype.positionX = function() {
+    return ((this.x / 4) * 100) +'%'
+  };
+
+  Cell.prototype.positionY = function() {
+    return ((this.y / 4) * 100) +'%'
+  };
 
   var Game = function() {
     this.playable = false;
@@ -73,13 +73,16 @@
       
         var el = $('<div class="puzzlepiece"><span class="position">'+ Number(i + 1) + '</span></div>')
         $('#puzzlearea').append(el);
-        // real cool animation thing
+        
+        // real cool animation 
+
         el.animate({
-          top: item.y+'px',
-          left: item.x+'px',
-          'background-position-x': '-' + item.x + 'px',
-          'background-position-y': '-' + item.y + 'px',
+          top: item.positionY(),
+          left: item.positionX(),
+          'background-position-y': item.backgroundY(),
+          'background-position-x': item.backgroundX(),
         }, 500);
+
         // animo tada, so good
         el.animo( { animation: 'tada', duration: 1.0 } );
         
@@ -119,7 +122,6 @@
     
     // figure out how to avoid filter step, prevent addition of undefined indexes
     // rather than filter them out after..
-
     this.movables = this.movables.filter(function(item) {
       if (item !== undefined) {
         return item;
@@ -167,28 +169,32 @@
     this.moves++;
 
     var clickedObject = event.data;
-    var oldX = clickedObject.x;
-    var oldY = clickedObject.y;
-    var oldIndex = clickedObject.index
+    
+    // apparently this is the most performant way to clone an object
+    var clickedClone = {
+      x: clickedObject.x,
+      y: clickedObject.y,
+      index: clickedObject.index
+    };
     
     var openCell = this.matrix.openCell;
     
-
     clickedObject.x = openCell.x;
     clickedObject.y = openCell.y;
     clickedObject.index = openCell.index;
     this.matrix.array[openCell.index] = clickedObject;
+    
     // change dom object too
     $(clickedObject.domObject).animate({
-      left: this.matrix.openCell.x,
-      top: this.matrix.openCell.y
+      top: this.matrix.openCell.positionY(),
+      left: this.matrix.openCell.positionX()
     }, 200);
 
     // set openCell to previously occupied cell coordinates
-    this.matrix.openCell.x = oldX;
-    this.matrix.openCell.y = oldY;
-    this.matrix.openCell.index = oldIndex;
-    this.matrix.array[oldIndex] = openCell
+    this.matrix.openCell.x = clickedClone.x;
+    this.matrix.openCell.y = clickedClone.y;
+    this.matrix.openCell.index = clickedClone.index;
+    this.matrix.array[clickedClone.index] = openCell
 
 
     // console.log("\n clickedObject.domObject clicked piece\n");

@@ -1,9 +1,20 @@
 @media only screen and (min-width:960px){
-  #puzzlearea {
-    width: 320px;
-    height: 480px;
-    font-size: 32pt;
-  } 
+	#puzzlearea {
+	  width: 314px;
+	  height: 400px;
+	  font-size: 32pt;
+	  margin: 10px auto;
+	}
+
+	.puzzlepiece {
+	  background-size: 314px 400px;
+	  /*314px 400px*/
+	  /*background-size: 438% 422%;*/
+
+	  height: 24.303797468%;
+	  width: 23.75%;
+	  line-height: 200%;
+	}
 }
 
 /* styles for browsers larger than 1440px; */
@@ -23,18 +34,13 @@
   }
 
   .puzzlepiece {
-    background-image: url(/images/adventure_time_2.jpg);
-    background-size: 320px 400px;
-    border: 2px solid #3A313B;
-    
+    /*background-size: 314px 400px;*/
+    /*314px 400px*/
+    background-size: 438% 422%;
+
     height: 24.303797468%;
-    /*height: 96px;*/
-
     width: 23.75%;
-    /*width: 76px;*/
-
     line-height: 200%;
-    /*line-height: 96px;*/
   }
 
 }
@@ -44,20 +50,27 @@
 
 /* different techniques for iPad screening */
 @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
-  #puzzlearea {
+  /*#puzzlearea {
     width: 768px;
     height: 1024px;
     font-size: 48pt;
+  }*/
+
+  #puzzlearea {
+    width: 314px;
+    height: 400px;
+    font-size: 32pt;
+    margin: 10px auto;
   }
 
   .puzzlepiece {
-    background-image: url(/images/adventure_time_2.jpg);
-    background-size: 320px 400px;
-    border: 2px solid #3A313B;
-    
-    height: 20.303797468%;
+    /*background-size: 314px 400px;*/
+    /*314px 400px*/
+    background-size: 438% 422%;
+
+    height: 24.303797468%;
     width: 23.75%;
-    line-height: 300%;
+    line-height: 200%;
   }
 }
 /* For landscape layouts only */
@@ -75,27 +88,15 @@ h1 {
 
 #puzzlearea {
 	font-family: monospace;
-	font-size: 32pt;
 	color: #EAD9C9;
 	text-shadow: 2px 2px #3A313B;
 	position: relative;
-
-	/*width: 320px;*/
-	/*height: 400px;*/
 }
 
 /* This class should be applied to each of the 15 puzzle pieces. */
 .puzzlepiece {
 	background-image: url(/images/adventure_time_2.jpg);
-	background-size: 320px 400px;
 	border: 2px solid #3A313B;
-	
-	/*height: 96px;*/
-	/*height: 24.303797468%;*/
-	/*width: 23.75%;*/
-	/*width: 76px;*/
-	/*line-height: 96px;*/
-
 	position: absolute;
 	text-align: center;
 	vertical-align: middle;
@@ -117,12 +118,9 @@ h1 {
 
 /*BOOTSTRAP OVERRIDES*/
 
-
 .container-fluid {
   padding-right: 0px;
   padding-left: 0px;
   margin: 0px auto;
-  /*margin-right: auto;*/
-  /*margin-left: auto;*/
 }
 
