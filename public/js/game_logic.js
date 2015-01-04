@@ -10,13 +10,23 @@
     var n = this.n;
     var index = 0;
 
+    console.log(window.innerHeight)
+    console.log(window.innerWidth)
+
     for (var y = 0; y < n; y++) {
       for (var x = 0; x < n; x++) {
         // multiply x and y coords by 100, because they also serve as pixel values
         // this seems like kind of bad design, not sure.
-        var xVal = x * 80;
+        
+        // var xVal = x * 80;
+
+        // switching to % based values
+        var xVal = x * 25;
+
         // var xVal = x * 100;
-        var yVal = y * 100;
+
+        // switching to % based values
+        var yVal = y * 25;
         // var yVal = y * 100;
         var cell = new Cell(xVal, yVal, index);
         
@@ -50,7 +60,7 @@
     // add special magical glitter
     this.addEventListeners();
 
-    this.shuffle();
+    // this.shuffle();
     this.moves = 0;
     this.playable = true;
   };

@@ -1,3 +1,69 @@
+@media only screen and (min-width:960px){
+  #puzzlearea {
+    width: 320px;
+    height: 480px;
+    font-size: 32pt;
+  } 
+}
+
+/* styles for browsers larger than 1440px; */
+/*@media only screen and (min-width:1440px){}*/
+
+/* for sumo sized (mac) screens */
+/*@media only screen and (min-width:2000px){}*/
+
+/* styles for mobile browsers smaller than 480px; (iPhone) */
+@media screen and (max-device-width:480px){
+
+  #puzzlearea {
+    width: 314px;
+    height: 400px;
+    font-size: 32pt;
+    margin: 10px auto;
+  }
+
+  .puzzlepiece {
+    background-image: url(/images/adventure_time_2.jpg);
+    background-size: 320px 400px;
+    border: 2px solid #3A313B;
+    
+    height: 24.303797468%;
+    /*height: 96px;*/
+
+    width: 23.75%;
+    /*width: 76px;*/
+
+    line-height: 200%;
+    /*line-height: 96px;*/
+  }
+
+}
+
+/* default iPad screens */
+/*@media only screen and (device-width:768px){}*/
+
+/* different techniques for iPad screening */
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+  #puzzlearea {
+    width: 768px;
+    height: 1024px;
+    font-size: 48pt;
+  }
+
+  .puzzlepiece {
+    background-image: url(/images/adventure_time_2.jpg);
+    background-size: 320px 400px;
+    border: 2px solid #3A313B;
+    
+    height: 20.303797468%;
+    width: 23.75%;
+    line-height: 300%;
+  }
+}
+/* For landscape layouts only */
+/*@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) {}*/
+
+
 body {
 	background-color: #5FAD8F;
 }
@@ -13,8 +79,9 @@ h1 {
 	color: #EAD9C9;
 	text-shadow: 2px 2px #3A313B;
 	position: relative;
-	width: 320px;
-	margin: 0px auto;
+
+	/*width: 320px;*/
+	/*height: 400px;*/
 }
 
 /* This class should be applied to each of the 15 puzzle pieces. */
@@ -22,14 +89,16 @@ h1 {
 	background-image: url(/images/adventure_time_2.jpg);
 	background-size: 320px 400px;
 	border: 2px solid #3A313B;
-	height: 96px;
+	
+	/*height: 96px;*/
 	/*height: 24.303797468%;*/
-	line-height: 96px;
+	/*width: 23.75%;*/
+	/*width: 76px;*/
+	/*line-height: 96px;*/
+
 	position: absolute;
 	text-align: center;
 	vertical-align: middle;
-	/*width: 23.75%;*/
-	width: 76px;
 }
 
 .position {
@@ -43,8 +112,6 @@ h1 {
 	font-weight: bold;
 	text-decoration: underline;
 }
-
-
 
 
 
